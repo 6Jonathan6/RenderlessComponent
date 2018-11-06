@@ -1,28 +1,46 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+<div id="app" class="min-h-screen bg-grey-darker p-8">
+    <div class="max-w-sm mx-auto card mt-8">
+      <label class="form-label mb-2">Renderless Tag Input</label>
+
+      <renderless-tag-input v-model="tags">
+        <div class="tag-input" slot-scope="{ tags }">
+          <span v-for="tag in tags" class="tag-input-tag" :key="tag">
+            <span>{{tag}}</span>
+            <button type="button" class="tag-input-remove"
+            >&times;</button>
+          </span>
+          <input class="tag-input-text" placeholder="Add tag..."
+          >
+        </div>
+      </renderless-tag-input>
+
+    </div>
+
+
+    <div class="max-w-sm mx-auto card mt-8">
+      <label class="form-label mb-2">Original Tag Input</label>
+      <tag-input v-model="tags"></tag-input>
+    </div>
   </div>
+
+
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import TagInput from './components/TagInput.vue'
+import RenderlessTagInput from './components/RenderlessTagInput.vue'
 export default {
   name: 'app',
-  components: {
-    HelloWorld
+   components: {
+    TagInput,
+    RenderlessTagInput,
+  },
+  data(){
+    return {
+       tags: ['awesome', 'excellent', 'amazing'],
+    }
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style src="./assets/css/app.css"/>
